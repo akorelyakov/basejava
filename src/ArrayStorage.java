@@ -11,7 +11,6 @@ public class ArrayStorage {
         if (count != 0) {
             for (int i = 0; i < count - 1; i++) {
                 storage[i] = null;
-                count = 0;
             }
         }
         count = 0;
@@ -23,36 +22,34 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
+        boolean isFound = false;
         int index = 0;
         for (int i = 0; i < count; i++) {
             if (storage[i].uuid == uuid) {
+                isFound = true;
                 index = i;
-                break;
-            } else {
-                index = 10001;
             }
-            break;
         }
-        if (index == 10001) {
-            return null;
-        } else {
-            return storage[index];
-        }
+        return isFound ? storage[index] : null;
     }
 
     void delete(String uuid) {
         int index = 0;
+        boolean isFound = false;
         for (int i = 0; i < count; i++) {
             if (storage[i].uuid == uuid) {
                 index = i;
+                isFound = true;
                 break;
             }
             break;
         }
-        for (int i = index; i <= count; i++) {
-            storage[i] = storage[i+1];
+        if (isFound) {
+            for (int i = index; i < count - 1; i++) {
+                storage[i] = storage[i+1];
         }
         count--;
+        }
     }
 
     /**

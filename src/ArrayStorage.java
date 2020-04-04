@@ -9,8 +9,9 @@ public class ArrayStorage {
 
     void clear() {
         if (count != 0) {
-            for (int i = 0; i < count - 1; i++) {
+            for (int i = 0; i < count; i++) {
                 storage[i] = null;
+                break;
             }
         }
         count = 0;
@@ -22,33 +23,29 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        boolean isFound = false;
-        int index = 0;
+        int index = -1;
         for (int i = 0; i < count; i++) {
             if (storage[i].uuid == uuid) {
-                isFound = true;
                 index = i;
+                break;
             }
         }
-        return isFound ? storage[index] : null;
+        return index == -1 ? null : storage[index];
     }
 
     void delete(String uuid) {
-        int index = 0;
-        boolean isFound = false;
+        int index = -1;
         for (int i = 0; i < count; i++) {
             if (storage[i].uuid == uuid) {
                 index = i;
-                isFound = true;
                 break;
             }
-            break;
         }
-        if (isFound) {
-            for (int i = index; i < count - 1; i++) {
-                storage[i] = storage[i+1];
-        }
-        count--;
+        if (index != -1) {
+            for (int i = index; i < count; i++) {
+                storage[i] = storage[i + 1];
+            }
+            count--;
         }
     }
 

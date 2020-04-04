@@ -42,7 +42,7 @@ public class ArrayStorage {
             }
         }
         if (index != -1) {
-            for (int i = index; i < count; i++) {
+            for (int i = index; i < count - 1; i++) {
                 storage[i] = storage[i + 1];
             }
             count--;

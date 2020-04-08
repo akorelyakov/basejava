@@ -33,6 +33,10 @@ public class MainTestArrayStorage {
         printAll();
         ARRAY_STORAGE.delete(r1.getUuid());
         printAll();
+        r3 = r5;
+        ARRAY_STORAGE.update(r3);
+        System.out.println("New r3 Uuid is: " + r3.getUuid());
+        printAll();
         ARRAY_STORAGE.clear();
         printAll();
 

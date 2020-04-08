@@ -8,28 +8,8 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    private Resume[] storage = new Resume[10000];
+    private Resume[] storage = new Resume[10_000];
     private int size = 0;
-
-    private int getIndex(Resume r) {
-        int index = -1;
-        for (int i = 0; i < size; i++) {
-            if (storage[i].getUuid() == r.getUuid()) {
-                index = i;
-            }
-        }
-        return index;
-    }
-
-    private int getIndex(String uuid) {
-        int index = -1;
-        for (int i = 0; i < size; i++) {
-            if (storage[i].getUuid() == uuid) {
-                index = i;
-            }
-        }
-        return index;
-    }
 
     public void clear() {
         if (size != 0) {
@@ -42,7 +22,7 @@ public class ArrayStorage {
         if (size == storage.length) {
             System.out.println("Storage is full!");
         } else {
-            if (getIndex(r) == -1) {
+            if (getIndex(r.getUuid()) == -1) {
                 storage[size] = r;
                 size++;
             } else {
@@ -55,10 +35,9 @@ public class ArrayStorage {
         int index = getIndex(uuid);
         if (index != -1) {
             return storage[index];
-        } else {
-            System.out.println("No resume in storage with such Uuid!");
-            return null;
         }
+        System.out.println("No resume in storage with such Uuid!");
+        return null;
     }
 
     public void delete(String uuid) {
@@ -73,7 +52,7 @@ public class ArrayStorage {
     }
 
     public void update(Resume r) {
-        int index = getIndex(r);
+        int index = getIndex(r.getUuid());
         if (index != -1) {
             storage[index] = r;
         } else {
@@ -90,5 +69,15 @@ public class ArrayStorage {
 
     public int size() {
         return size;
+    }
+
+    private int getIndex(String uuid) {
+        int index = -1;
+        for (int i = 0; i < size; i++) {
+            if (storage[i].getUuid().equals(uuid)) {
+                index = i;
+            }
+        }
+        return index;
     }
 }

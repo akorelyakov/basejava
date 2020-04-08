@@ -20,13 +20,13 @@ public class ArrayStorage {
 
     public void save(Resume r) {
         if (size == storage.length) {
-            System.out.println("Storage is full!");
+            System.out.println("The storage is full!");
         } else {
             if (getIndex(r.getUuid()) == -1) {
                 storage[size] = r;
                 size++;
             } else {
-                System.out.println("Resume already exists in storage!");
+                System.out.println("Resume already exists in the storage!");
             }
         }
     }
@@ -36,7 +36,7 @@ public class ArrayStorage {
         if (index != -1) {
             return storage[index];
         }
-        System.out.println("No resume in storage with such Uuid!");
+        System.out.println("No resume in the storage with such Uuid!");
         return null;
     }
 
@@ -47,16 +47,16 @@ public class ArrayStorage {
             storage[size - 1] = null;
             size--;
         } else {
-            System.out.println("No resume in storage with such Uuid!");
+            System.out.println("No resume in the storage with such Uuid!");
         }
     }
 
-    public void update(Resume r) {
-        int index = getIndex(r.getUuid());
+    public void update(Resume resume) {
+        int index = getIndex(resume.getUuid());
         if (index != -1) {
-            storage[index] = r;
+            storage[index] = resume;
         } else {
-            System.out.println("No resume in storage with such Uuid!");
+            System.out.println("No resume in the storage with such Uuid!");
         }
     }
 

@@ -19,7 +19,6 @@ public class MainTestSortedArrayStorage {
         Resume r5 = new Resume();
         r5.setUuid("uuid5");
 
-
         ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r2);
         ARRAY_STORAGE.save(r3);

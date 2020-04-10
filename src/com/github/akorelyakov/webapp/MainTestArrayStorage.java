@@ -1,13 +1,13 @@
 package com.github.akorelyakov.webapp;
 
 import com.github.akorelyakov.webapp.model.Resume;
-import com.github.akorelyakov.webapp.storage.SortedArrayStorage;
+import com.github.akorelyakov.webapp.storage.ArrayStorage;
 
 /**
  * Test for your com.github.akorelyakov.webapp.storage.ArrayStorage implementation
  */
 public class MainTestArrayStorage {
-    static final SortedArrayStorage ARRAY_STORAGE = new SortedArrayStorage();
+    static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
 
     public static void main(String[] args) {
         Resume r1 = new Resume();

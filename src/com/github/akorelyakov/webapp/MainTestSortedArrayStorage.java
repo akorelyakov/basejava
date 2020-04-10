@@ -3,10 +3,8 @@ package com.github.akorelyakov.webapp;
 import com.github.akorelyakov.webapp.model.Resume;
 import com.github.akorelyakov.webapp.storage.SortedArrayStorage;
 
-/**
- * Test for your com.github.akorelyakov.webapp.storage.ArrayStorage implementation
- */
-public class MainTestArrayStorage {
+
+public class MainTestSortedArrayStorage {
     static final SortedArrayStorage ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) {
@@ -20,6 +18,7 @@ public class MainTestArrayStorage {
         r4.setUuid("uuid4");
         Resume r5 = new Resume();
         r5.setUuid("uuid5");
+
 
         ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r2);

@@ -15,9 +15,8 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     }
 
     protected void checkedDelete(int index) {
-        for (int i = index; i < size - 1; i++) {
-            storage[i] = storage[i + 1];
-        }
+        if (size - 1 - index >= 0)
+            System.arraycopy(storage, index + 1, storage, index, size - 1 - index);
     }
 
     @Override

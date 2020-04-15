@@ -7,11 +7,11 @@ import com.github.akorelyakov.webapp.model.Resume;
  */
 public class ArrayStorage extends AbstractArrayStorage {
 
-    protected void checkedSave(Resume resume, int index) {
+    protected void insertElement(Resume resume, int index) {
         storage[size] = resume;
     }
 
-    protected void checkedDelete(int index) {
+    protected void fillDeletedElement(int index) {
         storage[index] = storage[size - 1];
     }
 

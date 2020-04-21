@@ -2,62 +2,59 @@ package com.github.akorelyakov.webapp.storage;
 
 import com.github.akorelyakov.webapp.exception.ExistStorageException;
 import com.github.akorelyakov.webapp.exception.NotExistStorageException;
+import com.github.akorelyakov.webapp.exception.StorageException;
 import com.github.akorelyakov.webapp.model.Resume;
 
-import java.util.ArrayList;
-
 public abstract class AbstractStorage implements Storage {
-    protected ArrayList<Resume> storage;
-
-    public AbstractStorage(ArrayList storage) {
-        this.storage = storage;
-    }
-
-    public void clear() {
-        storage.clear();
-    }
-
-    public void update(Resume resume) {
-        if (!storage.contains(resume)) {
-            throw new NotExistStorageException(resume.getUuid());
-        } else {
-            int index = getIndex(resume.getUuid());
-            storage.set(index, resume);
-        }
-    }
 
     public void save(Resume resume) {
-        if (storage.contains(resume)) {
+        int index = getIndex(resume.getUuid());
+        if (isFull(size())) {
+            throw new StorageException("Storage is full!", resume.getUuid());
+        } else if (isExist(index)) {
             throw new ExistStorageException(resume.getUuid());
-        } else {
-            storage.add(resume);
         }
-    }
-
-    public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index >= 0) {
-            return storage.get(index);
-        }
-        throw new NotExistStorageException(uuid);
+        getSave(resume, index);
     }
 
     public void delete(String uuid) {
         int index = getIndex(uuid);
-        if (index >= 0) {
-            storage.remove(index);
+        if (isExist(index)) {
+            getDelete(uuid, index);
         } else {
             throw new NotExistStorageException(uuid);
         }
     }
 
-    public Resume[] getAll() {
-        return storage.toArray(Resume[]::new);
+    public void update(Resume resume) {
+        int index = getIndex(resume.getUuid());
+        if (isExist(index)) {
+            getUpdate(resume, index);
+        } else {
+            throw new NotExistStorageException(resume.getUuid());
+        }
     }
 
-    public int size() {
-        return storage.size();
+    public Resume get(String uuid) {
+        int index = getIndex(uuid);
+        if (isExist(index)) {
+            return getResume(index);
+        } else {
+            throw new NotExistStorageException(uuid);
+        }
     }
+
+    protected abstract Resume getResume(int index);
 
     protected abstract int getIndex(String uuid);
+
+    protected abstract boolean isFull(int size);
+
+    protected abstract void getSave(Resume resume, int index);
+
+    protected abstract boolean isExist(int index);
+
+    protected abstract void getUpdate(Resume resume, int index);
+
+    protected abstract void getDelete(String uuid, int index);
 }

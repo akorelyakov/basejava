@@ -3,10 +3,11 @@ package com.github.akorelyakov.webapp.storage;
 import com.github.akorelyakov.webapp.model.Resume;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListStorage extends AbstractStorage implements Storage {
 
-    protected ArrayList<Resume> storage = new ArrayList<Resume>();
+    protected List<Resume> storage = new ArrayList<Resume>();
 
     public void clear() {
         storage.clear();

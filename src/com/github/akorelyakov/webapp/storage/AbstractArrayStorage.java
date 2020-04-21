@@ -24,10 +24,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     protected boolean isFull(int size) {
-        if (size >= STORAGE_LIMIT) {
-            return true;
-        }
-        return false;
+        return size >= STORAGE_LIMIT;
     }
 
     @Override
@@ -38,10 +35,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     protected boolean isExist(int index) {
-        if (index >= 0) {
-            return true;
-        }
-        return false;
+        return index >= 0;
     }
 
     @Override

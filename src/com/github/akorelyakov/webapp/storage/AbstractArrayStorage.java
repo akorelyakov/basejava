@@ -1,5 +1,6 @@
 package com.github.akorelyakov.webapp.storage;
 
+import com.github.akorelyakov.webapp.exception.StorageException;
 import com.github.akorelyakov.webapp.model.Resume;
 
 import java.util.Arrays;
@@ -11,41 +12,38 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     protected int size = 0;
 
     public void clear() {
-        if (size != 0) {
-            Arrays.fill(storage, 0, size, null);
-        }
+        Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
     @Override
-    protected Resume getResume(int index) {
-        return storage[index];
+    protected Resume doGet(Object index) {
+        return storage[(Integer) index];
     }
 
     @Override
-    protected boolean isFull(int size) {
-        return size >= STORAGE_LIMIT;
+    protected void doSave(Resume resume, Object index) {
+        if (size >= STORAGE_LIMIT) {
+            throw new StorageException("Storage is full!", resume.getUuid());
+        } else {
+            insertElement(resume, (Integer) index);
+            size++;
+        }
     }
 
     @Override
-    protected void getSave(Resume resume, int index) {
-        insertElement(resume, index);
-        size++;
+    protected boolean isExist(Object searchKey) {
+        return (Integer) searchKey >= 0;
     }
 
     @Override
-    protected boolean isExist(int index) {
-        return index >= 0;
+    protected void doUpdate(Resume resume, Object index) {
+        storage[(Integer) index] = resume;
     }
 
     @Override
-    protected void getUpdate(Resume resume, int index) {
-        storage[index] = resume;
-    }
-
-    @Override
-    protected void getDelete(String uuid, int index) {
-        fillDeletedElement(index);
+    protected void doDelete(Object index) {
+        fillDeletedElement((Integer) index);
         storage[size - 1] = null;
         size--;
     }
@@ -58,7 +56,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return size;
     }
 
-    protected abstract int getIndex(String uuid);
+    protected abstract Object getSearchKey(String uuid);
 
     protected abstract void fillDeletedElement(int index);
 

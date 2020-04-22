@@ -7,43 +7,35 @@ import java.util.List;
 
 public class ListStorage extends AbstractStorage implements Storage {
 
-    protected List<Resume> storage = new ArrayList<Resume>();
+    protected List<Resume> storage = new ArrayList<>();
 
     public void clear() {
         storage.clear();
     }
 
     @Override
-    protected boolean isExist(int index) {
-        return storage.contains(getResume(index));
+    protected boolean isExist(Object index) {
+        return index != null;
     }
 
     @Override
-    protected void getUpdate(Resume resume, int index) {
-        storage.set(index, resume);
+    protected void doUpdate(Resume resume, Object index) {
+        storage.set((Integer) index, resume);
     }
 
     @Override
-    protected boolean isFull(int size) {
-        return false;
-    }
-
-    @Override
-    protected void getSave(Resume resume, int index) {
+    protected void doSave(Resume resume, Object index) {
         storage.add(resume);
     }
 
     @Override
-    protected Resume getResume(int index) {
-        if (index >= 0) {
-            return storage.get(index);
-        }
-        return null;
+    protected Resume doGet(Object index) {
+        return storage.get((Integer) index);
     }
 
     @Override
-    protected void getDelete(String uuid, int index) {
-        storage.remove(index);
+    protected void doDelete(Object index) {
+        storage.remove(((Integer) index).intValue());
     }
 
     public Resume[] getAll() {
@@ -54,12 +46,12 @@ public class ListStorage extends AbstractStorage implements Storage {
         return storage.size();
     }
 
-    protected int getIndex(String uuid) {
-        for (Resume r : storage) {
-            if (uuid.equals(r.getUuid())) {
-                return storage.indexOf(r);
+    protected Integer getSearchKey(String uuid) {
+        for (int i = 0; i < storage.size(); i++) {
+            if (storage.get(i).getUuid().equals(uuid)) {
+                return i;
             }
         }
-        return -1;
+        return null;
     }
 }

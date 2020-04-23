@@ -10,11 +10,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractStorageTest {
-    private Storage storage;
-
-    public AbstractStorageTest(Storage storage) {
-        this.storage = storage;
-    }
+    protected Storage storage;
 
     private static final String UUID_1 = "uuid1";
     Resume resume1 = new Resume(UUID_1);
@@ -24,6 +20,12 @@ public abstract class AbstractStorageTest {
     Resume resume3 = new Resume(UUID_3);
     private static final String UUID_4 = "uuid4";
     Resume resume4 = new Resume(UUID_4);
+    private static final String dummyUuid = "dummyUuid";
+
+
+    public AbstractStorageTest(Storage storage) {
+        this.storage = storage;
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -50,18 +52,6 @@ public abstract class AbstractStorageTest {
         assertEquals(resume4, storage.get(UUID_4));
         assertEquals(4, storage.size());
     }
-/*
-    @Test(expected = StorageException.class)
-    public void saveOverflow() {
-        try {
-            for (int i = 4; i <= AbstractArrayStorage.STORAGE_LIMIT; i++) {
-                storage.save(new Resume());
-            }
-        } catch (StorageException e) {
-            fail();
-        }
-        storage.save(new Resume());
-    }*/
 
     @Test(expected = ExistStorageException.class)
     public void saveAlreadyExist() {
@@ -78,7 +68,7 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = NotExistStorageException.class)
     public void deleteNotExist() {
-        storage.delete("dummyUuid");
+        storage.delete(dummyUuid);
     }
 
     @Test
@@ -90,7 +80,7 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = NotExistStorageException.class)
     public void updateNotExist() {
-        Resume resume = new Resume("dummyUuid");
+        Resume resume = new Resume(dummyUuid);
         storage.update(resume);
     }
 
@@ -102,7 +92,7 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = NotExistStorageException.class)
     public void getNotExist() throws Exception {
-        storage.get("dummy");
+        storage.get(dummyUuid);
     }
 
     @Test

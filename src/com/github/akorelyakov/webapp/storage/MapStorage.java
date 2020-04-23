@@ -2,11 +2,10 @@ package com.github.akorelyakov.webapp.storage;
 
 import com.github.akorelyakov.webapp.model.Resume;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 public class MapStorage extends AbstractStorage {
-    private HashMap<String, Resume> storage = new HashMap<>();
+    private Map<String, Resume> storage = new HashMap<>();
 
     public void clear() {
         storage.clear();
@@ -18,7 +17,7 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected Object getSearchKey(String uuid) {
+    protected String getSearchKey(String uuid) {
         return uuid;
     }
 
@@ -43,9 +42,17 @@ public class MapStorage extends AbstractStorage {
     }
 
     //https://javarush.ru/groups/posts/1940-klass-hashmap-
+    //https://javarush.ru/groups/posts/844-kak-praviljhno-delatjh-sortirovku-v-java
     public Resume[] getAll() {
         ArrayList<Resume> resumes = new ArrayList<>(storage.values());
-        return resumes.toArray(Resume[]::new);
+        Resume[] sortedResumes = resumes.toArray(Resume[]::new);
+        Arrays.sort(sortedResumes, new Comparator<Resume>() {
+            public int compare(Resume o1, Resume o2) {
+                return o1.toString().compareTo(o2.toString());
+            }
+        });
+
+        return sortedResumes;
     }
 
     public int size() {

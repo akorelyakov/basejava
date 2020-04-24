@@ -29,17 +29,18 @@ public class ListStorage extends AbstractStorage implements Storage {
     }
 
     @Override
-    protected Resume doGet(Object index) {
-        return storage.get((Integer) index);
+    protected List<Resume> convertedStorageToList() {
+        return new ArrayList<>(storage);
+    }
+
+    @Override
+    protected Resume doGet(Object searchKey) {
+        return storage.get((Integer) searchKey);
     }
 
     @Override
     protected void doDelete(Object index) {
         storage.remove(((Integer) index).intValue());
-    }
-
-    public Resume[] getAll() {
-        return storage.toArray(Resume[]::new);
     }
 
     public int size() {

@@ -4,6 +4,7 @@ import com.github.akorelyakov.webapp.exception.StorageException;
 import com.github.akorelyakov.webapp.model.Resume;
 
 import java.util.Arrays;
+import java.util.List;
 
 public abstract class AbstractArrayStorage extends AbstractStorage {
     protected static final int STORAGE_LIMIT = 10_000;
@@ -17,8 +18,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected Resume doGet(Object index) {
-        return storage[(Integer) index];
+    protected Resume doGet(Object searchKey) {
+        return storage[(Integer) searchKey];
     }
 
     @Override
@@ -48,8 +49,9 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         size--;
     }
 
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
+    @Override
+    protected List<Resume> convertedStorageToList() {
+        return Arrays.asList(Arrays.copyOf(storage, size));
     }
 
     public int size() {

@@ -5,7 +5,7 @@ import com.github.akorelyakov.webapp.model.Resume;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListStorage extends AbstractStorage implements Storage {
+public class ListStorage extends AbstractStorage<Integer> implements Storage {
 
     protected List<Resume> storage = new ArrayList<>();
 
@@ -14,33 +14,33 @@ public class ListStorage extends AbstractStorage implements Storage {
     }
 
     @Override
-    protected boolean isExist(Object index) {
+    protected boolean isExist(Integer index) {
         return index != null;
     }
 
     @Override
-    protected void doUpdate(Resume resume, Object index) {
-        storage.set((Integer) index, resume);
+    protected void doUpdate(Resume resume, Integer index) {
+        storage.set(index, resume);
     }
 
     @Override
-    protected void doSave(Resume resume, Object index) {
+    protected void doSave(Resume resume, Integer index) {
         storage.add(resume);
     }
 
     @Override
-    protected List<Resume> convertedStorageToList() {
+    protected List<Resume> getStorageIsList() {
         return new ArrayList<>(storage);
     }
 
     @Override
-    protected Resume doGet(Object searchKey) {
-        return storage.get((Integer) searchKey);
+    protected Resume doGet(Integer searchKey) {
+        return storage.get(searchKey);
     }
 
     @Override
-    protected void doDelete(Object index) {
-        storage.remove(((Integer) index).intValue());
+    protected void doDelete(Integer index) {
+        storage.remove(index.intValue());
     }
 
     public int size() {

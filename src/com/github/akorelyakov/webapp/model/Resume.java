@@ -1,6 +1,5 @@
 package com.github.akorelyakov.webapp.model;
 
-import java.time.YearMonth;
 import java.util.*;
 
 /**
@@ -69,7 +68,13 @@ public class Resume implements Comparable<Resume> {
 
     @Override
     public String toString() {
-        return uuid + '(' + fullName + ')';    }
+        return "Resume{" +
+                "uuid='" + uuid + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", contacts=" + contacts +
+                ", sections=" + sections +
+                '}';
+    }
 
     @Override
     public int compareTo(Resume o) {

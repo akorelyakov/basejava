@@ -1,11 +1,10 @@
 package com.github.akorelyakov.webapp.model;
 
 public enum SectionType {
-    CONTACT("Контакты"),
     PERSONAL("Личные качества"),
     OBJECTIVE("Позиция"),
     ACHIEVEMENT("Достижения"),
-    QUALIFICATIONS("Квалификация"),
+    QUALIFICATION("Квалификация"),
     EXPERIENCE("Опыт работы"),
     EDUCATION("Образование");
 

@@ -1,25 +1,26 @@
+/*
 package com.github.akorelyakov.webapp.model;
 
-import java.util.Objects;
-
 public class ContactItem {
-    private final String contactItemName;
-    private String contactItemContent;
+    private String title;
+    private Link link;
 
-    public ContactItem(String contactItemName, String contactItemContent) {
-        Objects.requireNonNull(contactItemName, "contactItemName cant be null!");
-        this.contactItemContent = contactItemContent;
-        this.contactItemName = contactItemName;
+
+    public ContactItem(Link link) {
+         this.link = link;
     }
 
-    public String getContactItemName() {
-        return contactItemName;
+    public String contactItemContent() {
+        return title;
     }
 
-    public String getContactItemContent() {
-        return contactItemContent;
+    public String getTitle() {
+        return title;
     }
 
+    public Link getLink() {
+        return link;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -28,22 +29,24 @@ public class ContactItem {
 
         ContactItem that = (ContactItem) o;
 
-        if (!contactItemName.equals(that.contactItemName)) return false;
-        return contactItemContent != null ? contactItemContent.equals(that.contactItemContent) : that.contactItemContent == null;
+        if (title != null ? !title.equals(that.title) : that.title != null)
+            return false;
+        return link != null ? link.equals(that.link) : that.link == null;
     }
 
     @Override
     public int hashCode() {
-        int result = contactItemName.hashCode();
-        result = 31 * result + (contactItemContent != null ? contactItemContent.hashCode() : 0);
+        int result = title != null ? title.hashCode() : 0;
+        result = 31 * result + (link != null ? link.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "ContactItem{" +
-                "contactItemName='" + contactItemName + '\'' +
-                ", contactItemContent='" + contactItemContent + '\'' +
+                "title='" + title + '\'' +
+                ", link=" + link +
                 '}';
     }
 }
+*/

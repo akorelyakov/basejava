@@ -1,3 +1,4 @@
+/*
 package com.github.akorelyakov.webapp.model;
 
 import java.util.ArrayList;
@@ -5,14 +6,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class ContactSection extends Section {
-    List<ContactItem> contactListItems = new ArrayList<>();
+    private List<Link> contactListItems;
 
-    public ContactSection(List<ContactItem> contactListItems) {
+    public ContactSection(List<Link> contactListItems) {
         Objects.requireNonNull(contactListItems, "contactListItems cant be null!");
         this.contactListItems = contactListItems;
     }
 
-    public List<ContactItem> getContactListItems() {
+    public List<Link> getContactListItems() {
         return contactListItems;
     }
 
@@ -36,3 +37,4 @@ public class ContactSection extends Section {
         return contactListItems.toString();
     }
 }
+*/

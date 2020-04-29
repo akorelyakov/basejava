@@ -2,11 +2,13 @@ package com.github.akorelyakov.webapp.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class UListSection extends Section {
     private final List<String> listItems;
 
     public UListSection(List<String> listItems) {
+        Objects.requireNonNull(listItems, "listItems cant be null!");
         this.listItems = listItems;
     }
 

@@ -48,7 +48,7 @@ public class ResumeTestData {
                 "системы по JMX (Jython/ Django).");
         achievementList.add("Реализация протоколов по приему платежей всех основных платежных системы России " +
                 "(Cyberplat, Eport, Chronopay, Сбербанк), Белоруcсии(Erip, Osmp) и Никарагуа.");
-        gKislinResume.addSection(SectionType.ACHIEVEMENT, new UListSection(achievementList));
+        gKislinResume.addSection(SectionType.ACHIEVEMENT, new ListSection(achievementList));
 
         List<String> qualificationList = new ArrayList<>();
         qualificationList.add("JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2");
@@ -72,7 +72,7 @@ public class ResumeTestData {
         qualificationList.add("Отличное знание и опыт применения концепций ООП, SOA, шаблонов проектрирования, " +
                 "архитектурных шаблонов, UML, функционального программирования");
         qualificationList.add("Родной русский, английский \"upper intermediate\"");
-        gKislinResume.addSection(SectionType.QUALIFICATION, new UListSection(qualificationList));
+        gKislinResume.addSection(SectionType.QUALIFICATION, new ListSection(qualificationList));
 
         List<TimeDependItem> experienceList = new ArrayList<>();
         experienceList.add(new TimeDependItem(

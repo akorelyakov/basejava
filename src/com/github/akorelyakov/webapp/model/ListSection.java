@@ -3,10 +3,10 @@ package com.github.akorelyakov.webapp.model;
 import java.util.List;
 import java.util.Objects;
 
-public class UListSection extends Section {
+public class ListSection extends Section {
     private final List<String> listItems;
 
-    public UListSection(List<String> listItems) {
+    public ListSection(List<String> listItems) {
         Objects.requireNonNull(listItems, "listItems cant be null!");
         this.listItems = listItems;
     }
@@ -25,7 +25,7 @@ public class UListSection extends Section {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UListSection that = (UListSection) o;
+        ListSection that = (ListSection) o;
 
         return listItems.equals(that.listItems);
     }

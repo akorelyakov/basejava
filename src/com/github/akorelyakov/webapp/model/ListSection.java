@@ -4,20 +4,20 @@ import java.util.List;
 import java.util.Objects;
 
 public class ListSection extends Section {
-    private final List<String> listItems;
+    private final List<String> items;
 
-    public ListSection(List<String> listItems) {
-        Objects.requireNonNull(listItems, "listItems cant be null!");
-        this.listItems = listItems;
+    public ListSection(List<String> items) {
+        Objects.requireNonNull(items, "items must not be null");
+        this.items = items;
     }
 
-    public List<String> getListItems() {
-        return listItems;
+    public List<String> getItems() {
+        return items;
     }
 
     @Override
-    public int hashCode() {
-        return listItems.hashCode();
+    public String toString() {
+        return items.toString();
     }
 
     @Override
@@ -27,11 +27,12 @@ public class ListSection extends Section {
 
         ListSection that = (ListSection) o;
 
-        return listItems.equals(that.listItems);
+        return items.equals(that.items);
+
     }
 
     @Override
-    public String toString() {
-        return listItems.toString();
+    public int hashCode() {
+        return items.hashCode();
     }
 }

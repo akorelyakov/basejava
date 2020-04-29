@@ -3,21 +3,26 @@ package com.github.akorelyakov.webapp.model;
 import java.util.Objects;
 
 public class Link {
-    private final String anchor;
+    private final String name;
     private final String url;
 
-    public Link(String anchor, String url) {
-        Objects.requireNonNull(anchor, "anchor cant be null!");
-        this.anchor = anchor;
+    public Link(String name, String url) {
+        Objects.requireNonNull(name, "name must not be null");
+        this.name = name;
         this.url = url;
     }
 
-    public String getAnchor() {
-        return anchor;
+    public String getName() {
+        return name;
     }
 
     public String getUrl() {
         return url;
+    }
+
+    @Override
+    public String toString() {
+        return "Link(" + name + ',' + url + ')';
     }
 
     @Override
@@ -27,22 +32,15 @@ public class Link {
 
         Link link = (Link) o;
 
-        if (!anchor.equals(link.anchor)) return false;
+        if (!name.equals(link.name)) return false;
         return url != null ? url.equals(link.url) : link.url == null;
+
     }
 
     @Override
     public int hashCode() {
-        int result = anchor.hashCode();
+        int result = name.hashCode();
         result = 31 * result + (url != null ? url.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Link{" +
-                "anchor='" + anchor + '\'' +
-                ", url='" + url + '\'' +
-                '}';
     }
 }

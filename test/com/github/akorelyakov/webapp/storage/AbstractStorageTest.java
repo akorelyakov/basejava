@@ -14,6 +14,8 @@ import static org.junit.Assert.assertEquals;
 public abstract class AbstractStorageTest {
     protected Storage storage;
 
+    //Заполнить все резюме какими-то данными и убедиться, что тесты проходят
+
     private static final String UUID_1 = "uuid1";
     private Resume resume1 = new Resume(UUID_1, "fullName1");
     private static final String UUID_2 = "uuid2";

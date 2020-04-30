@@ -64,7 +64,6 @@ public class Organization {
                 '}';
     }
 
-
     public static class Stage {
         private final LocalDate startDate;
         private final LocalDate endDate;
@@ -131,6 +130,5 @@ public class Organization {
                     ", endDate=" + endDate +
                     '}';
         }
-
     }
 }

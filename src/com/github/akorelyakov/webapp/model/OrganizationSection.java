@@ -10,6 +10,7 @@ public class OrganizationSection extends Section {
     public OrganizationSection(Organization... organizations) {
         this(Arrays.asList(organizations));
     }
+
     public OrganizationSection(List<Organization> organizations) {
         Objects.requireNonNull(organizations, "organizations must not be null");
         this.organizations = organizations;
@@ -27,7 +28,6 @@ public class OrganizationSection extends Section {
         OrganizationSection that = (OrganizationSection) o;
 
         return organizations.equals(that.organizations);
-
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.github.akorelyakov.webapp.storage;
 
+import com.github.akorelyakov.webapp.ResumeTestData;
 import com.github.akorelyakov.webapp.exception.ExistStorageException;
 import com.github.akorelyakov.webapp.exception.NotExistStorageException;
 import com.github.akorelyakov.webapp.model.Resume;
@@ -14,17 +15,22 @@ import static org.junit.Assert.assertEquals;
 public abstract class AbstractStorageTest {
     protected Storage storage;
 
-    //Заполнить все резюме какими-то данными и убедиться, что тесты проходят
-
     private static final String UUID_1 = "uuid1";
-    private Resume resume1 = new Resume(UUID_1, "fullName1");
+    private static Resume RESUME1;
     private static final String UUID_2 = "uuid2";
-    private Resume resume2 = new Resume(UUID_2, "fullName2");
+    private static Resume RESUME2;
     private static final String UUID_3 = "uuid3";
-    private Resume resume3 = new Resume(UUID_3, "fullName3");
+    private static Resume RESUME3;
     private static final String UUID_4 = "uuid4";
-    private Resume resume4 = new Resume(UUID_4, "fullName4");
+    private static Resume RESUME4;
     private static final String dummyUuid = "dummyUuid";
+
+    static {
+        RESUME1 = ResumeTestData.getTestResume1(UUID_1);
+        RESUME2 = ResumeTestData.getTestResume2(UUID_2);
+        RESUME3 = ResumeTestData.getTestResume3(UUID_3);
+        RESUME4 = ResumeTestData.getTestResume4(UUID_4);
+    }
 
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -33,9 +39,9 @@ public abstract class AbstractStorageTest {
     @Before
     public void setUp() throws Exception {
         storage.clear();
-        storage.save(resume1);
-        storage.save(resume2);
-        storage.save(resume3);
+        storage.save(RESUME1);
+        storage.save(RESUME2);
+        storage.save(RESUME3);
     }
 
     @Test
@@ -51,8 +57,8 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void save() {
-        storage.save(resume4);
-        assertEquals(resume4, storage.get(UUID_4));
+        storage.save(RESUME4);
+        assertEquals(RESUME4, storage.get(UUID_4));
         assertEquals(4, storage.size());
     }
 
@@ -88,9 +94,10 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
-    public void get() {
-        Resume resume = new Resume(UUID_1, "fullName1");
-        assertEquals(resume, storage.get(UUID_1));
+    public void get() throws Exception {
+        assertGet(RESUME1);
+        assertGet(RESUME2);
+        assertGet(RESUME3);
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -99,9 +106,13 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
-    public void getAllSorted() {
+    public void getAllSorted() throws Exception {
         List<Resume> list = storage.getAllSorted();
         assertEquals(3, list.size());
-        assertEquals(Arrays.asList(resume1, resume2, resume3), list);
+        assertEquals(list, Arrays.asList(RESUME2, RESUME3, RESUME1));
+    }
+
+    private void assertGet(Resume resume) {
+        assertEquals(resume, storage.get(resume.getUuid()));
     }
 }

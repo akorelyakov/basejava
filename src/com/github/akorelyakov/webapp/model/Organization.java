@@ -10,32 +10,32 @@ import java.util.Objects;
 
 public class Organization {
     private final Link homePage;
-    private List<Stage> stages;
+    private List<Experience> experiences;
 
-    public Organization(String name, String url, Stage... stages) {
-        this(new Link(name, url), Arrays.asList(stages));
+    public Organization(String name, String url, Experience... experiences) {
+        this(new Link(name, url), Arrays.asList(experiences));
     }
 
-    public Organization(String name, String url, List<Stage> stages) {
+    public Organization(String name, String url, List<Experience> experiences) {
         this.homePage = new Link(name, url);
-        this.stages = stages;
+        this.experiences = experiences;
     }
 
-    public Organization(Link homePage, List<Stage> stages) {
+    public Organization(Link homePage, List<Experience> experiences) {
         this.homePage = homePage;
-        this.stages = stages;
+        this.experiences = experiences;
     }
 
     public Link getHomePage() {
         return homePage;
     }
 
-    public List<Stage> getStages() {
-        return stages;
+    public List<Experience> getExperiences() {
+        return experiences;
     }
 
-    public void setStages(List<Stage> stages) {
-        this.stages = stages;
+    public void setExperiences(List<Experience> experiences) {
+        this.experiences = experiences;
     }
 
     @Override
@@ -46,13 +46,13 @@ public class Organization {
         Organization that = (Organization) o;
 
         if (!homePage.equals(that.homePage)) return false;
-        return stages.equals(that.stages);
+        return experiences.equals(that.experiences);
     }
 
     @Override
     public int hashCode() {
         int result = homePage.hashCode();
-        result = 31 * result + stages.hashCode();
+        result = 31 * result + experiences.hashCode();
         return result;
     }
 
@@ -60,22 +60,22 @@ public class Organization {
     public String toString() {
         return "Organization{" +
                 "homePage=" + homePage +
-                ", stages=" + stages +
+                ", experiences=" + experiences +
                 '}';
     }
 
-    public static class Stage {
+    public static class Experience {
         private final LocalDate startDate;
         private final LocalDate endDate;
         private final String title;
         private final String description;
 
-        public Stage(int startYear, Month startMonth, int endYear, Month endMonth, String title, String description) {
+        public Experience(int startYear, Month startMonth, int endYear, Month endMonth, String title, String description) {
             this(DateUtil.of(startYear, startMonth), DateUtil.of(endYear, endMonth), title,
                     description);
         }
 
-        public Stage(LocalDate startDate, LocalDate endDate, String title, String description) {
+        public Experience(LocalDate startDate, LocalDate endDate, String title, String description) {
             Objects.requireNonNull(startDate, "startDate must not be null");
             Objects.requireNonNull(endDate, "endDate must not be null");
             Objects.requireNonNull(title, "title must not be null");
@@ -105,7 +105,7 @@ public class Organization {
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-            Stage position = (Stage) o;
+            Experience position = (Experience) o;
             return Objects.equals(startDate, position.startDate) &&
                     Objects.equals(endDate, position.endDate) &&
                     Objects.equals(title, position.title) &&
@@ -123,7 +123,7 @@ public class Organization {
 
         @Override
         public String toString() {
-            return "Stage{" +
+            return "Experience{" +
                     "title='" + title + '\'' +
                     ", description='" + description + '\'' +
                     ", startDate=" + startDate +

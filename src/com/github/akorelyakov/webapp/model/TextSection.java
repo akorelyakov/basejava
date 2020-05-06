@@ -3,6 +3,8 @@ package com.github.akorelyakov.webapp.model;
 import java.util.Objects;
 
 public class TextSection extends AbstractSection {
+    private static final long serialVersionUID = 1L;
+
     private final String content;
 
     public TextSection(String content) {
@@ -23,11 +25,8 @@ public class TextSection extends AbstractSection {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         TextSection that = (TextSection) o;
-
         return content.equals(that.content);
-
     }
 
     @Override

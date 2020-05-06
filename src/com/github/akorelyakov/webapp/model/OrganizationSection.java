@@ -1,10 +1,13 @@
 package com.github.akorelyakov.webapp.model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class OrganizationSection extends AbstractSection {
+public class OrganizationSection extends AbstractSection implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private final List<Organization> organizations;
 
     public OrganizationSection(Organization... organizations) {

@@ -1,4 +1,7 @@
 package com.github.akorelyakov.webapp.model;
 
-public abstract class AbstractSection {
+import java.io.Serializable;
+
+public abstract class AbstractSection implements Serializable {
+    private static final long serialVersionUID = 1L;
 }

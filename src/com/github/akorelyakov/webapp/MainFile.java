@@ -1,27 +1,30 @@
 package com.github.akorelyakov.webapp;
 
 import java.io.File;
-import java.util.Objects;
 
 public class MainFile {
     public static void main(String[] args) {
         File directory = new File(".\\src\\com\\github\\akorelyakov" +
                 "\\webapp");
-        directoryListPrinter(directory);
+        printDirectoryDeeply(directory, "\t");
     }
 
-    private static void directoryListPrinter(File directory) {
-        if (directory.isDirectory()) {
-            for (File item : Objects.requireNonNull(directory.listFiles())) {
-                if (item.isDirectory()) {
-                    System.out.println();
-                    System.out.println("=====FOLDER: " + item.getName().toUpperCase() + " ======");
-                    directoryListPrinter(item);
-                    System.out.println();
-                } else {
-                    System.out.println(item.getName());
+    private static void printDirectoryDeeply(File directory, String indent) {
+        File[] files = directory.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    indent += "\t";
+                    System.out.println(indent + "Directory: " + file.getName());
+                    indent += "\t";
+                    printDirectoryDeeply(file, indent);
+                    indent = "\t";
+                } else if (file.isFile()) {
+                    System.out.println(indent + "File: " + file.getName());
                 }
+
             }
         }
     }
+
 }

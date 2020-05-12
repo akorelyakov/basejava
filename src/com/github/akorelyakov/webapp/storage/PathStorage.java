@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PathStorage extends AbstractStorage<Path> {
     private Path directory;
@@ -27,13 +28,10 @@ public class PathStorage extends AbstractStorage<Path> {
         this.directory = directory;
     }
 
-    //TODO Реализовать все методы, clear() есть в коммите
-    // Надо смотреть на методы Files
-
     @Override
     public void clear() {
         try {
-            Files.list(directory).forEach(this::doDelete);
+            getFilesList().forEach(this::doDelete);
         } catch (IOException e) {
             throw new StorageException("Path delete error", null);
         }
@@ -42,7 +40,7 @@ public class PathStorage extends AbstractStorage<Path> {
     @Override
     public int size() {
         try {
-            return (int) Files.list(directory).count();
+            return (int) getFilesList().count();
         } catch (IOException e) {
             throw new StorageException("Path read error", null, e);
         }
@@ -99,9 +97,13 @@ public class PathStorage extends AbstractStorage<Path> {
     @Override
     protected List<Resume> doCopyAll() {
         try {
-            return Files.list(directory).map(this::doGet).collect(Collectors.toList());
+            return getFilesList().map(this::doGet).collect(Collectors.toList());
         } catch (IOException e) {
             throw new StorageException("Path read error", null, e);
         }
+    }
+
+    private Stream<Path> getFilesList() throws IOException {
+        return Files.list(directory);
     }
 }

@@ -4,7 +4,9 @@ import com.github.akorelyakov.webapp.exception.StorageException;
 import com.github.akorelyakov.webapp.model.Resume;
 import com.github.akorelyakov.webapp.storage.serializer.StreamSerializer;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,20 +32,14 @@ public class PathStorage extends AbstractStorage<Path> {
 
     @Override
     public void clear() {
-        try {
-            getFilesList().forEach(this::doDelete);
-        } catch (IOException e) {
-            throw new StorageException("Path delete error", null);
-        }
+        getFilesList().forEach(this::doDelete);
+
     }
 
     @Override
     public int size() {
-        try {
-            return (int) getFilesList().count();
-        } catch (IOException e) {
-            throw new StorageException("Path read error", null, e);
-        }
+        return (int) getFilesList().count();
+
     }
 
     @Override
@@ -96,14 +92,14 @@ public class PathStorage extends AbstractStorage<Path> {
 
     @Override
     protected List<Resume> doCopyAll() {
+        return getFilesList().map(this::doGet).collect(Collectors.toList());
+    }
+
+    private Stream<Path> getFilesList() {
         try {
-            return getFilesList().map(this::doGet).collect(Collectors.toList());
+            return Files.list(directory);
         } catch (IOException e) {
             throw new StorageException("Path read error", null, e);
         }
-    }
-
-    private Stream<Path> getFilesList() throws IOException {
-        return Files.list(directory);
     }
 }

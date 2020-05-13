@@ -2,7 +2,6 @@ package com.github.akorelyakov.webapp.storage.serializer;
 
 import com.github.akorelyakov.webapp.exception.StorageException;
 import com.github.akorelyakov.webapp.model.Resume;
-import com.github.akorelyakov.webapp.storage.serializer.StreamSerializer;
 
 import java.io.*;
 

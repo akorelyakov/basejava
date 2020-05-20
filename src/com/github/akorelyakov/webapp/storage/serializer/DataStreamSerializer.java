@@ -17,27 +17,17 @@ public class DataStreamSerializer implements StreamSerializer {
             writeCollection(dos, contacts.entrySet(), entry -> {
                 dos.writeUTF(entry.getKey().name());
                 dos.writeUTF(entry.getValue());
-                    });
-//            dos.writeInt(contacts.size());
-//            for (Map.Entry<ContactType, String> entry :
-//                    contacts.entrySet()) {
-//                dos.writeUTF(entry.getKey().name());
-//                dos.writeUTF(entry.getValue());
-//            }
+            });
             Map<SectionType, AbstractSection> sections = resume.getSections();
             writeCollection(dos, sections.entrySet(), entry -> {
                 writeSection(dos, entry);
             });
-//            dos.writeInt(sections.size());
-//            for (Map.Entry<SectionType, AbstractSection> entry : sections.entrySet()) {
-//                writeSection(dos, entry);
-//            }
         }
     }
 
     private <T> void writeCollection(DataOutputStream dos, Collection<T> collection, CollectionWriter<T> action) throws IOException {
         dos.writeInt(collection.size());
-        for (T t: collection) {
+        for (T t : collection) {
             action.accept(t);
         }
     }
@@ -77,8 +67,6 @@ public class DataStreamSerializer implements StreamSerializer {
                     for (Organization.Position position : positions) {
                         writeLocalDate(dos, position.getStartDate());
                         writeLocalDate(dos, position.getEndDate());
-                        //dos.writeUTF(position.getStartDate().format(FORMATTER));
-                        //dos.writeUTF(position.getEndDate().format(FORMATTER));
                         dos.writeUTF(position.getTitle());
                         dos.writeUTF(position.getDescription() == null ? "" : position.getDescription());
                     }
@@ -153,7 +141,4 @@ public class DataStreamSerializer implements StreamSerializer {
         }
         return null;
     }
-
-
-
 }

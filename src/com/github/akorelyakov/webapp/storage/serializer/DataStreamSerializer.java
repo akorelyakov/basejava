@@ -4,14 +4,9 @@ import com.github.akorelyakov.webapp.model.*;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DataStreamSerializer implements StreamSerializer {
-
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("ddMMyyyy");
 
     @Override
     public void doWrite(Resume resume, OutputStream os) throws IOException {
@@ -19,18 +14,37 @@ public class DataStreamSerializer implements StreamSerializer {
             dos.writeUTF(resume.getUuid());
             dos.writeUTF(resume.getFullName());
             Map<ContactType, String> contacts = resume.getContacts();
-            dos.writeInt(contacts.size());
-            for (Map.Entry<ContactType, String> entry :
-                    contacts.entrySet()) {
+            writeCollection(dos, contacts.entrySet(), entry -> {
                 dos.writeUTF(entry.getKey().name());
                 dos.writeUTF(entry.getValue());
-            }
+                    });
+//            dos.writeInt(contacts.size());
+//            for (Map.Entry<ContactType, String> entry :
+//                    contacts.entrySet()) {
+//                dos.writeUTF(entry.getKey().name());
+//                dos.writeUTF(entry.getValue());
+//            }
             Map<SectionType, AbstractSection> sections = resume.getSections();
-            dos.writeInt(sections.size());
-            for (Map.Entry<SectionType, AbstractSection> entry : sections.entrySet()) {
+            writeCollection(dos, sections.entrySet(), entry -> {
                 writeSection(dos, entry);
-            }
+            });
+//            dos.writeInt(sections.size());
+//            for (Map.Entry<SectionType, AbstractSection> entry : sections.entrySet()) {
+//                writeSection(dos, entry);
+//            }
         }
+    }
+
+    private <T> void writeCollection(DataOutputStream dos, Collection<T> collection, CollectionWriter<T> action) throws IOException {
+        dos.writeInt(collection.size());
+        for (T t: collection) {
+            action.accept(t);
+        }
+    }
+
+    @FunctionalInterface
+    public interface CollectionWriter<T> {
+        void accept(T t) throws IOException;
     }
 
     private void writeSection(DataOutputStream dos, Map.Entry<SectionType, AbstractSection> entry) throws IOException {
@@ -139,4 +153,7 @@ public class DataStreamSerializer implements StreamSerializer {
         }
         return null;
     }
+
+
+
 }

@@ -61,14 +61,25 @@ public class DataStreamSerializer implements StreamSerializer {
                     List<Organization.Position> positions = organization.getPositions();
                     dos.writeInt(positions.size());
                     for (Organization.Position position : positions) {
-                        dos.writeUTF(position.getStartDate().format(FORMATTER));
-                        dos.writeUTF(position.getEndDate().format(FORMATTER));
+                        writeLocalDate(dos, position.getStartDate());
+                        writeLocalDate(dos, position.getEndDate());
+                        //dos.writeUTF(position.getStartDate().format(FORMATTER));
+                        //dos.writeUTF(position.getEndDate().format(FORMATTER));
                         dos.writeUTF(position.getTitle());
                         dos.writeUTF(position.getDescription() == null ? "" : position.getDescription());
                     }
                 }
                 break;
         }
+    }
+
+    private void writeLocalDate(DataOutputStream dos, LocalDate date) throws IOException {
+        dos.writeInt(date.getYear());
+        dos.writeInt(date.getMonthValue());
+    }
+
+    private LocalDate readLocalDate(int year, int month) {
+        return LocalDate.of(year, month, 1);
     }
 
     @Override
@@ -115,8 +126,8 @@ public class DataStreamSerializer implements StreamSerializer {
                     List<Organization.Position> positions = new ArrayList<>();
                     int stagesSize = dis.readInt();
                     for (int j = 0; j < stagesSize; j++) {
-                        LocalDate startDate = LocalDate.parse(dis.readUTF(), FORMATTER);
-                        LocalDate endDate = LocalDate.parse(dis.readUTF(), FORMATTER);
+                        LocalDate startDate = readLocalDate(dis.readInt(), dis.readInt());
+                        LocalDate endDate = readLocalDate(dis.readInt(), dis.readInt());
                         String title = dis.readUTF();
                         String description = dis.readUTF();
                         positions.add(new Organization.Position(startDate, endDate, title, (description.isEmpty() ?

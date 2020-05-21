@@ -25,18 +25,6 @@ public class DataStreamSerializer implements StreamSerializer {
         }
     }
 
-    private <T> void writeCollection(DataOutputStream dos, Collection<T> collection, CollectionWriter<T> action) throws IOException {
-        dos.writeInt(collection.size());
-        for (T t : collection) {
-            action.accept(t);
-        }
-    }
-
-    @FunctionalInterface
-    public interface CollectionWriter<T> {
-        void accept(T t) throws IOException;
-    }
-
     private void writeSection(DataOutputStream dos, Map.Entry<SectionType, AbstractSection> entry) throws IOException {
         AbstractSection section = entry.getValue();
         SectionType type = entry.getKey();
@@ -52,15 +40,10 @@ public class DataStreamSerializer implements StreamSerializer {
                 writeCollection(dos, list, item -> {
                     dos.writeUTF(item);
                 });
-//                dos.writeInt(list.size());
-//                for (String item : list) {
-//                    dos.writeUTF(item);
-//                }
                 break;
             case EXPERIENCE:
             case EDUCATION:
                 List<Organization> organizations = ((OrganizationSection) section).getOrganizations();
-//                dos.writeInt(organizations.size());
                 writeCollection(dos, organizations, organization -> {
                     Link homePage = organization.getHomePage();
                     dos.writeUTF(homePage.getName());
@@ -73,30 +56,8 @@ public class DataStreamSerializer implements StreamSerializer {
                         dos.writeUTF(position.getDescription() == null ? "" : position.getDescription());
                     });
                 });
-//                for (Organization organization : organizations) {
-//                    Link homePage = organization.getHomePage();
-//                    dos.writeUTF(homePage.getName());
-//                    dos.writeUTF(homePage.getUrl() == null ? "" : homePage.getUrl());
-//                    List<Organization.Position> positions = organization.getPositions();
-//                    dos.writeInt(positions.size());
-//                    for (Organization.Position position : positions) {
-//                        writeLocalDate(dos, position.getStartDate());
-//                        writeLocalDate(dos, position.getEndDate());
-//                        dos.writeUTF(position.getTitle());
-//                        dos.writeUTF(position.getDescription() == null ? "" : position.getDescription());
-//                    }
-//                }
                 break;
         }
-    }
-
-    private void writeLocalDate(DataOutputStream dos, LocalDate date) throws IOException {
-        dos.writeInt(date.getYear());
-        dos.writeInt(date.getMonthValue());
-    }
-
-    private LocalDate readLocalDate(int year, int month) {
-        return LocalDate.of(year, month, 1);
     }
 
     @Override
@@ -106,24 +67,60 @@ public class DataStreamSerializer implements StreamSerializer {
             String fullName = dis.readUTF();
             Resume resume = new Resume(uuid, fullName);
             readCollection(dis, () -> resume.addContact(ContactType.valueOf(dis.readUTF()), dis.readUTF()));
-//            int contactsSize = dis.readInt();
-//            for (int i = 0; i < contactsSize; i++) {
-//                resume.addContact(ContactType.valueOf(dis.readUTF()), dis.readUTF());
-//            }
             readCollection(dis, () -> {
                 String sectionName = dis.readUTF();
                 SectionType sectionType = SectionType.valueOf(sectionName);
                 resume.addSection(sectionType, readSection(dis, sectionType));
             });
-
-//            int sectionsSize = dis.readInt();
-//            for (int i = 0; i < sectionsSize; i++) {
-//                String sectionName = dis.readUTF();
-//                SectionType sectionType = SectionType.valueOf(sectionName);
-//                resume.addSection(sectionType, readSection(dis, sectionType));
-//            }
             return resume;
         }
+    }
+
+    private AbstractSection readSection(DataInputStream dis, SectionType sectionType) throws IOException {
+        switch (sectionType) {
+            case OBJECTIVE:
+            case PERSONAL:
+                return new TextSection(dis.readUTF());
+            case ACHIEVEMENT:
+            case QUALIFICATION:
+                List<String> list = new ArrayList<>();
+                readCollection(dis, () -> {
+                    list.add(dis.readUTF());
+                });
+                return new ListSection(list);
+            case EXPERIENCE:
+            case EDUCATION:
+                List<Organization> organizations = new ArrayList<>();
+                readCollection(dis, () -> {
+                    String name = dis.readUTF();
+                    String url = dis.readUTF();
+                    url = (url.isEmpty() ? null : url);
+                    List<Organization.Position> positions = new ArrayList<>();
+                    readCollection(dis, () -> {
+                        LocalDate startDate = readLocalDate(dis.readInt(), dis.readInt());
+                        LocalDate endDate = readLocalDate(dis.readInt(), dis.readInt());
+                        String title = dis.readUTF();
+                        String description = dis.readUTF();
+                        positions.add(new Organization.Position(startDate, endDate, title, (description.isEmpty() ?
+                                null : description)));
+                    });
+                    organizations.add(new Organization(new Link(name, url), positions));
+                });
+                return new OrganizationSection(organizations);
+        }
+        return null;
+    }
+
+    private <T> void writeCollection(DataOutputStream dos, Collection<T> collection, CollectionWriter<T> action) throws IOException {
+        dos.writeInt(collection.size());
+        for (T t : collection) {
+            action.accept(t);
+        }
+    }
+
+    @FunctionalInterface
+    public interface CollectionWriter<T> {
+        void accept(T t) throws IOException;
     }
 
     private void readCollection(DataInputStream dis, CollectionReader action) throws IOException {
@@ -138,69 +135,12 @@ public class DataStreamSerializer implements StreamSerializer {
         void accept() throws IOException;
     }
 
-    private AbstractSection readSection(DataInputStream dis, SectionType sectionType) throws IOException {
-        switch (sectionType) {
-            case OBJECTIVE:
-            case PERSONAL:
-                return new TextSection(dis.readUTF());
-            case ACHIEVEMENT:
-            case QUALIFICATION:
-                List<String> list = new ArrayList<>();
-                readCollection(dis, () -> {
-                    list.add(dis.readUTF());
-                });
-//                int listSize = dis.readInt();
-//                List<String> list = new ArrayList<>();
-//                for (int i = 0; i < listSize; i++) {
-//                    list.add(dis.readUTF());
-//                }
-                return new ListSection(list);
-            case EXPERIENCE:
-            case EDUCATION:
-                List<Organization> organizations = new ArrayList<>();
-                readCollection(dis, () -> {
-                    String name = dis.readUTF();
-                    String url = dis.readUTF();
-                    url = (url.isEmpty() ? null : url);
-                    List<Organization.Position> positions = new ArrayList<>();
-                    readCollection(dis, ()  -> {
-                        LocalDate startDate = readLocalDate(dis.readInt(), dis.readInt());
-                        LocalDate endDate = readLocalDate(dis.readInt(), dis.readInt());
-                        String title = dis.readUTF();
-                        String description = dis.readUTF();
-                        positions.add(new Organization.Position(startDate, endDate, title, (description.isEmpty() ?
-                                null : description)));
-                    });
-//                    int stagesSize = dis.readInt();
-//                    for (int j = 0; j < stagesSize; j++) {
-//                        LocalDate startDate = readLocalDate(dis.readInt(), dis.readInt());
-//                        LocalDate endDate = readLocalDate(dis.readInt(), dis.readInt());
-//                        String title = dis.readUTF();
-//                        String description = dis.readUTF();
-//                        positions.add(new Organization.Position(startDate, endDate, title, (description.isEmpty() ?
-//                                null : description)));
-//                    }
-                    organizations.add(new Organization(new Link(name, url), positions));
-                });
-//                int size = dis.readInt();
-//                for (int i = 0; i < size; i++) {
-//                    String name = dis.readUTF();
-//                    String url = dis.readUTF();
-//                    url = (url.isEmpty() ? null : url);
-//                    List<Organization.Position> positions = new ArrayList<>();
-//                    int stagesSize = dis.readInt();
-//                    for (int j = 0; j < stagesSize; j++) {
-//                        LocalDate startDate = readLocalDate(dis.readInt(), dis.readInt());
-//                        LocalDate endDate = readLocalDate(dis.readInt(), dis.readInt());
-//                        String title = dis.readUTF();
-//                        String description = dis.readUTF();
-//                        positions.add(new Organization.Position(startDate, endDate, title, (description.isEmpty() ?
-//                                null : description)));
-//                    }
-//                    organizations.add(new Organization(new Link(name, url), positions));
-//                }
-                return new OrganizationSection(organizations);
-        }
-        return null;
+    private void writeLocalDate(DataOutputStream dos, LocalDate date) throws IOException {
+        dos.writeInt(date.getYear());
+        dos.writeInt(date.getMonthValue());
+    }
+
+    private LocalDate readLocalDate(int year, int month) {
+        return LocalDate.of(year, month, 1);
     }
 }

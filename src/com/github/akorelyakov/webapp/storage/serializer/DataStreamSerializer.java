@@ -50,8 +50,8 @@ public class DataStreamSerializer implements StreamSerializer {
             case QUALIFICATION:
                 List<String> list = ((ListSection) section).getItems();
                 writeCollection(dos, list, item -> {
-                dos.writeUTF(item);
-            });
+                    dos.writeUTF(item);
+                });
 //                dos.writeInt(list.size());
 //                for (String item : list) {
 //                    dos.writeUTF(item);
@@ -62,7 +62,7 @@ public class DataStreamSerializer implements StreamSerializer {
                 List<Organization> organizations = ((OrganizationSection) section).getOrganizations();
 //                dos.writeInt(organizations.size());
                 writeCollection(dos, organizations, organization -> {
-                Link homePage = organization.getHomePage();
+                    Link homePage = organization.getHomePage();
                     dos.writeUTF(homePage.getName());
                     dos.writeUTF(homePage.getUrl() == null ? "" : homePage.getUrl());
                     List<Organization.Position> positions = organization.getPositions();
@@ -71,8 +71,8 @@ public class DataStreamSerializer implements StreamSerializer {
                         writeLocalDate(dos, position.getEndDate());
                         dos.writeUTF(position.getTitle());
                         dos.writeUTF(position.getDescription() == null ? "" : position.getDescription());
+                    });
                 });
-            });
 //                for (Organization organization : organizations) {
 //                    Link homePage = organization.getHomePage();
 //                    dos.writeUTF(homePage.getName());
@@ -105,18 +105,37 @@ public class DataStreamSerializer implements StreamSerializer {
             String uuid = dis.readUTF();
             String fullName = dis.readUTF();
             Resume resume = new Resume(uuid, fullName);
-            int contactsSize = dis.readInt();
-            for (int i = 0; i < contactsSize; i++) {
-                resume.addContact(ContactType.valueOf(dis.readUTF()), dis.readUTF());
-            }
-            int sectionsSize = dis.readInt();
-            for (int i = 0; i < sectionsSize; i++) {
+            readCollection(dis, () -> resume.addContact(ContactType.valueOf(dis.readUTF()), dis.readUTF()));
+//            int contactsSize = dis.readInt();
+//            for (int i = 0; i < contactsSize; i++) {
+//                resume.addContact(ContactType.valueOf(dis.readUTF()), dis.readUTF());
+//            }
+            readCollection(dis, () -> {
                 String sectionName = dis.readUTF();
                 SectionType sectionType = SectionType.valueOf(sectionName);
                 resume.addSection(sectionType, readSection(dis, sectionType));
-            }
+            });
+
+//            int sectionsSize = dis.readInt();
+//            for (int i = 0; i < sectionsSize; i++) {
+//                String sectionName = dis.readUTF();
+//                SectionType sectionType = SectionType.valueOf(sectionName);
+//                resume.addSection(sectionType, readSection(dis, sectionType));
+//            }
             return resume;
         }
+    }
+
+    private void readCollection(DataInputStream dis, CollectionReader action) throws IOException {
+        int size = dis.readInt();
+        for (int i = 0; i < size; i++) {
+            action.accept();
+        }
+    }
+
+    @FunctionalInterface
+    public interface CollectionReader {
+        void accept() throws IOException;
     }
 
     private AbstractSection readSection(DataInputStream dis, SectionType sectionType) throws IOException {
@@ -126,32 +145,60 @@ public class DataStreamSerializer implements StreamSerializer {
                 return new TextSection(dis.readUTF());
             case ACHIEVEMENT:
             case QUALIFICATION:
-                int listSize = dis.readInt();
                 List<String> list = new ArrayList<>();
-                for (int i = 0; i < listSize; i++) {
+                readCollection(dis, () -> {
                     list.add(dis.readUTF());
-                }
+                });
+//                int listSize = dis.readInt();
+//                List<String> list = new ArrayList<>();
+//                for (int i = 0; i < listSize; i++) {
+//                    list.add(dis.readUTF());
+//                }
                 return new ListSection(list);
             case EXPERIENCE:
             case EDUCATION:
                 List<Organization> organizations = new ArrayList<>();
-                int size = dis.readInt();
-                for (int i = 0; i < size; i++) {
+                readCollection(dis, () -> {
                     String name = dis.readUTF();
                     String url = dis.readUTF();
                     url = (url.isEmpty() ? null : url);
                     List<Organization.Position> positions = new ArrayList<>();
-                    int stagesSize = dis.readInt();
-                    for (int j = 0; j < stagesSize; j++) {
+                    readCollection(dis, ()  -> {
                         LocalDate startDate = readLocalDate(dis.readInt(), dis.readInt());
                         LocalDate endDate = readLocalDate(dis.readInt(), dis.readInt());
                         String title = dis.readUTF();
                         String description = dis.readUTF();
                         positions.add(new Organization.Position(startDate, endDate, title, (description.isEmpty() ?
                                 null : description)));
-                    }
+                    });
+//                    int stagesSize = dis.readInt();
+//                    for (int j = 0; j < stagesSize; j++) {
+//                        LocalDate startDate = readLocalDate(dis.readInt(), dis.readInt());
+//                        LocalDate endDate = readLocalDate(dis.readInt(), dis.readInt());
+//                        String title = dis.readUTF();
+//                        String description = dis.readUTF();
+//                        positions.add(new Organization.Position(startDate, endDate, title, (description.isEmpty() ?
+//                                null : description)));
+//                    }
                     organizations.add(new Organization(new Link(name, url), positions));
-                }
+                });
+//                int size = dis.readInt();
+//                for (int i = 0; i < size; i++) {
+//                    String name = dis.readUTF();
+//                    String url = dis.readUTF();
+//                    url = (url.isEmpty() ? null : url);
+//                    List<Organization.Position> positions = new ArrayList<>();
+//                    int stagesSize = dis.readInt();
+//                    for (int j = 0; j < stagesSize; j++) {
+//                        LocalDate startDate = readLocalDate(dis.readInt(), dis.readInt());
+//                        LocalDate endDate = readLocalDate(dis.readInt(), dis.readInt());
+//                        String title = dis.readUTF();
+//                        String description = dis.readUTF();
+//                        positions.add(new Organization.Position(startDate, endDate, title, (description.isEmpty() ?
+//                                null : description)));
+//                    }
+//                    organizations.add(new Organization(new Link(name, url), positions));
+//                }
                 return new OrganizationSection(organizations);
         }
         return null;

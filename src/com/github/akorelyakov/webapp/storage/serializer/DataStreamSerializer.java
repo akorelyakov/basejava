@@ -49,28 +49,43 @@ public class DataStreamSerializer implements StreamSerializer {
             case ACHIEVEMENT:
             case QUALIFICATION:
                 List<String> list = ((ListSection) section).getItems();
-                dos.writeInt(list.size());
-                for (String item : list) {
-                    dos.writeUTF(item);
-                }
+                writeCollection(dos, list, item -> {
+                dos.writeUTF(item);
+            });
+//                dos.writeInt(list.size());
+//                for (String item : list) {
+//                    dos.writeUTF(item);
+//                }
                 break;
             case EXPERIENCE:
             case EDUCATION:
                 List<Organization> organizations = ((OrganizationSection) section).getOrganizations();
-                dos.writeInt(organizations.size());
-                for (Organization organization : organizations) {
-                    Link homePage = organization.getHomePage();
+//                dos.writeInt(organizations.size());
+                writeCollection(dos, organizations, organization -> {
+                Link homePage = organization.getHomePage();
                     dos.writeUTF(homePage.getName());
                     dos.writeUTF(homePage.getUrl() == null ? "" : homePage.getUrl());
                     List<Organization.Position> positions = organization.getPositions();
-                    dos.writeInt(positions.size());
-                    for (Organization.Position position : positions) {
+                    writeCollection(dos, positions, position -> {
                         writeLocalDate(dos, position.getStartDate());
                         writeLocalDate(dos, position.getEndDate());
                         dos.writeUTF(position.getTitle());
                         dos.writeUTF(position.getDescription() == null ? "" : position.getDescription());
-                    }
-                }
+                });
+            });
+//                for (Organization organization : organizations) {
+//                    Link homePage = organization.getHomePage();
+//                    dos.writeUTF(homePage.getName());
+//                    dos.writeUTF(homePage.getUrl() == null ? "" : homePage.getUrl());
+//                    List<Organization.Position> positions = organization.getPositions();
+//                    dos.writeInt(positions.size());
+//                    for (Organization.Position position : positions) {
+//                        writeLocalDate(dos, position.getStartDate());
+//                        writeLocalDate(dos, position.getEndDate());
+//                        dos.writeUTF(position.getTitle());
+//                        dos.writeUTF(position.getDescription() == null ? "" : position.getDescription());
+//                    }
+//                }
                 break;
         }
     }

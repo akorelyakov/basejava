@@ -37,9 +37,7 @@ public class DataStreamSerializer implements StreamSerializer {
             case ACHIEVEMENT:
             case QUALIFICATION:
                 List<String> list = ((ListSection) section).getItems();
-                writeCollection(dos, list, item -> {
-                    dos.writeUTF(item);
-                });
+                writeCollection(dos, list, dos::writeUTF);
                 break;
             case EXPERIENCE:
             case EDUCATION:

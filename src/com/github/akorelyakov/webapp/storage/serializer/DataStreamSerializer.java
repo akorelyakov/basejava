@@ -19,9 +19,7 @@ public class DataStreamSerializer implements StreamSerializer {
                 dos.writeUTF(entry.getValue());
             });
             Map<SectionType, AbstractSection> sections = resume.getSections();
-            writeCollection(dos, sections.entrySet(), entry -> {
-                writeSection(dos, entry);
-            });
+            writeCollection(dos, sections.entrySet(), entry -> writeSection(dos, entry));
         }
     }
 
@@ -82,9 +80,7 @@ public class DataStreamSerializer implements StreamSerializer {
             case ACHIEVEMENT:
             case QUALIFICATION:
                 List<String> list = new ArrayList<>();
-                readCollection(dis, () -> {
-                    list.add(dis.readUTF());
-                });
+                readCollection(dis, () -> list.add(dis.readUTF()));
                 return new ListSection(list);
             case EXPERIENCE:
             case EDUCATION:

@@ -8,34 +8,28 @@ public class DeadLockTest {
 
         Thread thread1 = new Thread() {
             public void run() {
-                synchronized (STRING1) {
-                    System.out.println("Output " + STRING1 + " from " + Thread.currentThread().getName() + " waiting " +
-                            "for STRING2...");
-                    Thread.yield();
-                    synchronized (STRING2) {
-                        System.out.println(STRING2 + " from " + Thread.currentThread().getName());
-                    }
-                }
-
+                printStringsFromThreads(STRING1, STRING2);
             }
         };
 
         Thread thread2 = new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println();
-                synchronized (STRING2) {
-                    System.out.println("Output " + STRING2 + " from " + Thread.currentThread().getName() + " waiting " +
-                            "for STRING1...");
-                    Thread.yield();
-                    synchronized (STRING1) {
-                        System.out.println(STRING1 + " from " + Thread.currentThread().getName());
-                    }
-                }
+                printStringsFromThreads(STRING2, STRING1);
             }
         });
 
         thread1.start();
         thread2.start();
+    }
+
+    private static void printStringsFromThreads(String string1, String string2) {
+        synchronized (string1) {
+            System.out.println("Output " + string1 + " from " + Thread.currentThread().getName());
+            Thread.yield();
+            synchronized (string2) {
+                System.out.println("Now output " + string2 + " from " + Thread.currentThread().getName());
+            }
+        }
     }
 }

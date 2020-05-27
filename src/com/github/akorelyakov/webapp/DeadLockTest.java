@@ -26,7 +26,11 @@ public class DeadLockTest {
     private static void printStringsFromThreads(String string1, String string2) {
         synchronized (string1) {
             System.out.println("Output " + string1 + " from " + Thread.currentThread().getName());
-            Thread.yield();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             synchronized (string2) {
                 System.out.println("Now output " + string2 + " from " + Thread.currentThread().getName());
             }

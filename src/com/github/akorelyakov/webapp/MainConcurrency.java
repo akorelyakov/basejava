@@ -33,7 +33,6 @@ public class MainConcurrency {
 //                    counter++;
                 }
             }
-
         }).start();
 
         System.out.println(thread0.getState());

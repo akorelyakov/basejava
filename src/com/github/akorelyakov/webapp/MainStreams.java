@@ -25,7 +25,6 @@ public class MainStreams {
     public static void main(String[] args) {
         int[] values = new int[]{1, 2, 3, 3, 2, 3, 4};
         System.out.println(minValue(values));
-
         List<Integer> list = new ArrayList<>();
         list.add(1);
         list.add(2);

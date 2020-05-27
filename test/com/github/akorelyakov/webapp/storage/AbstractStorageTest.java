@@ -1,5 +1,6 @@
 package com.github.akorelyakov.webapp.storage;
 
+import com.github.akorelyakov.webapp.Config;
 import com.github.akorelyakov.webapp.ResumeTestData;
 import com.github.akorelyakov.webapp.exception.ExistStorageException;
 import com.github.akorelyakov.webapp.exception.NotExistStorageException;
@@ -14,16 +15,16 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractStorageTest {
-    protected static final File STORAGE_DIR = new File(".\\storage");
+    protected static final File STORAGE_DIR = Config.get().getStorageDir();
     protected Storage storage;
 
-    private static final String UUID_1 = "uuid1";
+    private static final String UUID_1 = "uuid1                               ";
     private static Resume RESUME1;
-    private static final String UUID_2 = "uuid2";
+    private static final String UUID_2 = "uuid2                               ";
     private static Resume RESUME2;
-    private static final String UUID_3 = "uuid3";
+    private static final String UUID_3 = "uuid3                               ";
     private static Resume RESUME3;
-    private static final String UUID_4 = "uuid4";
+    private static final String UUID_4 = "uuid4                               ";
     private static Resume RESUME4;
     private static final String dummyUuid = "dummyUuid";
 

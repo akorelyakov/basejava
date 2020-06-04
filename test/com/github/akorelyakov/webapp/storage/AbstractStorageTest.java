@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import static com.github.akorelyakov.webapp.model.ContactType.*;
 import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractStorageTest {
@@ -87,6 +88,9 @@ public abstract class AbstractStorageTest {
     @Test
     public void update() {
         Resume resume = new Resume(UUID_1, "New Name");
+        resume.addContact(PHONE, "+1231231");
+        resume.addContact(SKYPE, "new skype");
+        resume.addContact(MAIL, "mailto:gkislin@yandex.ru");
         storage.update(resume);
         assertEquals(resume, storage.get(UUID_1));
     }

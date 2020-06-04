@@ -18,13 +18,13 @@ public class ResumeTestData {
 
     public static Resume getTestResume1(String uuid) {
         Resume testResume = new Resume(uuid,"Григорий Кислин");
-//        testResume.addContact(PHONE, "+7(921) 855-0482");
-//        testResume.addContact(SKYPE, "grigory.kislin");
-//        testResume.addContact(MAIL, "mailto:gkislin@yandex.ru");
-//        testResume.addContact(LINKEDIN, "https://www.linkedin.com/in/gkislin");
-//        testResume.addContact(GITHUB, "https://github.com/gkislin");
-//        testResume.addContact(STACKOVERFLOW, "https://stackoverflow.com/users/548473");
-//        testResume.addContact(HOME_PAGE, "http://gkislin.ru/");
+        testResume.addContact(PHONE, "+7(921) 855-0482");
+        testResume.addContact(SKYPE, "grigory.kislin");
+        testResume.addContact(MAIL, "mailto:gkislin@yandex.ru");
+        testResume.addContact(LINKEDIN, "https://www.linkedin.com/in/gkislin");
+        testResume.addContact(GITHUB, "https://github.com/gkislin");
+        testResume.addContact(STACKOVERFLOW, "https://stackoverflow.com/users/548473");
+        testResume.addContact(HOME_PAGE, "http://gkislin.ru/");
 //        testResume.addSection(SectionType.OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного " +
 //                "обучения по Java Web и Enterprise технологиям\n"));
 //        testResume.addSection(SectionType.PERSONAL, new TextSection("Аналитический склад ума, сильная логика, " +
@@ -158,13 +158,13 @@ public class ResumeTestData {
 
     public static Resume getTestResume2(String uuid) {
         Resume testResume2 = new Resume(uuid,"name2");
-//        testResume2.addContact(PHONE, "+7(921) 22222");
-//        testResume2.addContact(SKYPE, "skype2");
-//        testResume2.addContact(MAIL, "mail2");
-//        testResume2.addContact(LINKEDIN, "https://www.linkedin.com/in/2");
-//        testResume2.addContact(GITHUB, "https://github.com/2");
-//        testResume2.addContact(STACKOVERFLOW, "https://stackoverflow.com/users/2");
-//        testResume2.addContact(HOME_PAGE, "http://2.ru/");
+        testResume2.addContact(PHONE, "+7(921) 22222");
+        testResume2.addContact(SKYPE, "skype2");
+        testResume2.addContact(MAIL, "mail2");
+        testResume2.addContact(LINKEDIN, "https://www.linkedin.com/in/2");
+        testResume2.addContact(GITHUB, "https://github.com/2");
+        testResume2.addContact(STACKOVERFLOW, "https://stackoverflow.com/users/2");
+        testResume2.addContact(HOME_PAGE, "http://2.ru/");
 //        testResume2.addSection(SectionType.OBJECTIVE, new TextSection("Позиция - резюме 2"));
 //        testResume2.addSection(SectionType.PERSONAL, new TextSection("Личные качества - резюме 2"));
 //        List<String> achievementList = new ArrayList<>();
@@ -208,13 +208,13 @@ public class ResumeTestData {
 
     public static Resume getTestResume3(String uuid) {
         Resume testResume3 = new Resume(uuid,"name3");
-//        testResume3.addContact(PHONE, "+7(921) 33333");
-//        testResume3.addContact(SKYPE, "skype3");
-//        testResume3.addContact(MAIL, "mail3");
-//        testResume3.addContact(LINKEDIN, "https://www.linkedin.com/in/3");
-//        testResume3.addContact(GITHUB, "https://github.com/3");
-//        testResume3.addContact(STACKOVERFLOW, "https://stackoverflow.com/users/3");
-//        testResume3.addContact(HOME_PAGE, "http://3.ru/");
+        testResume3.addContact(PHONE, "+7(921) 33333");
+        testResume3.addContact(SKYPE, "skype3");
+        testResume3.addContact(MAIL, "mail3");
+        testResume3.addContact(LINKEDIN, "https://www.linkedin.com/in/3");
+        testResume3.addContact(GITHUB, "https://github.com/3");
+        testResume3.addContact(STACKOVERFLOW, "https://stackoverflow.com/users/3");
+        testResume3.addContact(HOME_PAGE, "http://3.ru/");
 //        testResume3.addSection(SectionType.OBJECTIVE, new TextSection("Позиция - резюме 3"));
 //        testResume3.addSection(SectionType.PERSONAL, new TextSection("Личные качества - резюме 3"));
 //        List<String> achievementList = new ArrayList<>();
@@ -258,13 +258,13 @@ public class ResumeTestData {
 
     public static Resume getTestResume4(String uuid) {
         Resume testResume4 = new Resume(uuid,"name4");
-//        testResume4.addContact(PHONE, "+7(921) 44444");
-//        testResume4.addContact(SKYPE, "skype4");
-//        testResume4.addContact(MAIL, "mail4");
-//        testResume4.addContact(LINKEDIN, "https://www.linkedin.com/in/4");
-//        testResume4.addContact(GITHUB, "https://github.com/4");
-//        testResume4.addContact(STACKOVERFLOW, "https://stackoverflow.com/users/4");
-//        testResume4.addContact(HOME_PAGE, "http://4.ru/");
+        testResume4.addContact(PHONE, "+7(921) 44444");
+        testResume4.addContact(SKYPE, "skype4");
+        testResume4.addContact(MAIL, "mail4");
+        testResume4.addContact(LINKEDIN, "https://www.linkedin.com/in/4");
+        testResume4.addContact(GITHUB, "https://github.com/4");
+        testResume4.addContact(STACKOVERFLOW, "https://stackoverflow.com/users/4");
+        testResume4.addContact(HOME_PAGE, "http://4.ru/");
 //        testResume4.addSection(SectionType.OBJECTIVE, new TextSection("Позиция - резюме 4"));
 //        testResume4.addSection(SectionType.PERSONAL, new TextSection("Личные качества - резюме 4"));
 //        List<String> achievementList = new ArrayList<>();

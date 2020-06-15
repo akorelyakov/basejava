@@ -25,53 +25,53 @@ public class ResumeTestData {
         testResume.addContact(GITHUB, "https://github.com/gkislin");
         testResume.addContact(STACKOVERFLOW, "https://stackoverflow.com/users/548473");
         testResume.addContact(HOME_PAGE, "http://gkislin.ru/");
-//        testResume.addSection(SectionType.OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного " +
-//                "обучения по Java Web и Enterprise технологиям\n"));
-//        testResume.addSection(SectionType.PERSONAL, new TextSection("Аналитический склад ума, сильная логика, " +
-//                "креативность, инициативность. Пурист кода и архитектуры."));
-//        List<String> achievementList = new ArrayList<>();
-//        achievementList.add("С 2013 года: разработка проектов \"Разработка Web приложения\"" +
-//                ",\"Java Enterprise\", \"Многомодульный maven. Многопоточность. XML (JAXB/StAX). " +
-//                "Веб сервисы (JAX-RS/SOAP). Удаленное взаимодействие (JMS/AKKA)\". " +
-//                "Организация онлайн стажировок и ведение проектов. Более 1000 выпускников.");
-//        achievementList.add("Реализация двухфакторной аутентификации для онлайн платформы управления проектами Wrike. " +
-//                "Интеграция с Twilio, DuoSecurity, Google Authenticator, Jira, Zendesk.");
-//        achievementList.add("Налаживание процесса разработки и непрерывной интеграции ERP системы River BPM. " +
-//                "Интеграция с 1С, Bonita BPM, CMIS, LDAP. Разработка приложения управления окружением на стеке: " +
-//                "Scala/Play/Anorm/JQuery. Разработка SSO аутентификации и авторизации различных ERP модулей, " +
-//                "интеграция CIFS/SMB java сервера.");
-//        achievementList.add("Реализация c нуля Rich Internet Application приложения на стеке технологий JPA, " +
-//                "Spring, Spring-MVC, GWT, ExtGWT (GXT), Commet, HTML5, Highstock для алгоритмического трейдинга.");
-//        achievementList.add("Создание JavaEE фреймворка для отказоустойчивого взаимодействия слабо-связанных сервисов " +
-//                "(SOA-base архитектура, JAX-WS, JMS, AS Glassfish). Сбор статистики сервисов и информации о состоянии " +
-//                "через систему мониторинга Nagios. Реализация онлайн клиента для администрирования и мониторинга " +
-//                "системы по JMX (Jython/ Django).");
-//        achievementList.add("Реализация протоколов по приему платежей всех основных платежных системы России " +
-//                "(Cyberplat, Eport, Chronopay, Сбербанк), Белоруcсии(Erip, Osmp) и Никарагуа.");
-//        testResume.addSection(SectionType.ACHIEVEMENT, new ListSection(achievementList));
-//        List<String> qualificationList = new ArrayList<>();
-//        qualificationList.add("JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2");
-//        qualificationList.add("Version control: Subversion, Git, Mercury, ClearCase, Perforce");
-//        qualificationList.add("DB: PostgreSQL(наследование, pgplsql, PL/Python), Redis (Jedis), H2, Oracle,");
-//        qualificationList.add("MySQL, SQLite, MS SQL, HSQLDB");
-//        qualificationList.add("Languages: Java, Scala, Python/Jython/PL-Python, JavaScript, Groovy,");
-//        qualificationList.add("XML/XSD/XSLT, SQL, C/C++, Unix shell scripts,");
-//        qualificationList.add("Java Frameworks: Java 8 (Time API, Streams), Guava, Java Executor, MyBatis, " +
-//                "Spring (MVC, Security, Data, Clouds, Boot), JPA (Hibernate, EclipseLink), Guice, GWT(SmartGWT, " +
-//                "ExtGWT/GXT), Vaadin, Jasperreports, Apache Commons, Eclipse SWT, JUnit, Selenium (htmlelements).");
-//        qualificationList.add("Python: Django");
-//        qualificationList.add("JavaScript: jQuery, ExtJS, Bootstrap.js, underscore.js");
-//        qualificationList.add("Scala: SBT, Play2, Specs2, Anorm, Spray, Akka");
-//        qualificationList.add("Технологии: Servlet, JSP/JSTL, JAX-WS, REST, EJB, RMI, JMS, JavaMail, JAXB, " +
-//                "StAX, SAX, DOM, XSLT, MDB, JMX, JDBC, JPA, JNDI, JAAS, SOAP, AJAX, Commet, HTML5, ESB, CMIS, " +
-//                "BPMN2, LDAP, OAuth1, OAuth2, JWT.");
-//        qualificationList.add("Инструменты: Maven + plugin development, Gradle, настройка Ngnix,");
-//        qualificationList.add("администрирование Hudson/Jenkins, Ant + custom task, SoapUI, JPublisher, Flyway, " +
-//                "Nagios, iReport, OpenCmis, Bonita, pgBouncer.");
-//        qualificationList.add("Отличное знание и опыт применения концепций ООП, SOA, шаблонов проектрирования, " +
-//                "архитектурных шаблонов, UML, функционального программирования");
-//        qualificationList.add("Родной русский, английский \"upper intermediate\"");
-//        testResume.addSection(SectionType.QUALIFICATION, new ListSection(qualificationList));
+        testResume.addSection(SectionType.OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного " +
+                "обучения по Java Web и Enterprise технологиям\n"));
+        testResume.addSection(SectionType.PERSONAL, new TextSection("Аналитический склад ума, сильная логика, " +
+                "креативность, инициативность. Пурист кода и архитектуры."));
+        List<String> achievementList = new ArrayList<>();
+        achievementList.add("С 2013 года: разработка проектов \"Разработка Web приложения\"" +
+                ",\"Java Enterprise\", \"Многомодульный maven. Многопоточность. XML (JAXB/StAX). " +
+                "Веб сервисы (JAX-RS/SOAP). Удаленное взаимодействие (JMS/AKKA)\". " +
+                "Организация онлайн стажировок и ведение проектов. Более 1000 выпускников.");
+        achievementList.add("Реализация двухфакторной аутентификации для онлайн платформы управления проектами Wrike. " +
+                "Интеграция с Twilio, DuoSecurity, Google Authenticator, Jira, Zendesk.");
+        achievementList.add("Налаживание процесса разработки и непрерывной интеграции ERP системы River BPM. " +
+                "Интеграция с 1С, Bonita BPM, CMIS, LDAP. Разработка приложения управления окружением на стеке: " +
+                "Scala/Play/Anorm/JQuery. Разработка SSO аутентификации и авторизации различных ERP модулей, " +
+                "интеграция CIFS/SMB java сервера.");
+        achievementList.add("Реализация c нуля Rich Internet Application приложения на стеке технологий JPA, " +
+                "Spring, Spring-MVC, GWT, ExtGWT (GXT), Commet, HTML5, Highstock для алгоритмического трейдинга.");
+        achievementList.add("Создание JavaEE фреймворка для отказоустойчивого взаимодействия слабо-связанных сервисов " +
+                "(SOA-base архитектура, JAX-WS, JMS, AS Glassfish). Сбор статистики сервисов и информации о состоянии " +
+                "через систему мониторинга Nagios. Реализация онлайн клиента для администрирования и мониторинга " +
+                "системы по JMX (Jython/ Django).");
+        achievementList.add("Реализация протоколов по приему платежей всех основных платежных системы России " +
+                "(Cyberplat, Eport, Chronopay, Сбербанк), Белоруcсии(Erip, Osmp) и Никарагуа.");
+        testResume.addSection(SectionType.ACHIEVEMENT, new ListSection(achievementList));
+        List<String> qualificationList = new ArrayList<>();
+        qualificationList.add("JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2");
+        qualificationList.add("Version control: Subversion, Git, Mercury, ClearCase, Perforce");
+        qualificationList.add("DB: PostgreSQL(наследование, pgplsql, PL/Python), Redis (Jedis), H2, Oracle,");
+        qualificationList.add("MySQL, SQLite, MS SQL, HSQLDB");
+        qualificationList.add("Languages: Java, Scala, Python/Jython/PL-Python, JavaScript, Groovy,");
+        qualificationList.add("XML/XSD/XSLT, SQL, C/C++, Unix shell scripts,");
+        qualificationList.add("Java Frameworks: Java 8 (Time API, Streams), Guava, Java Executor, MyBatis, " +
+                "Spring (MVC, Security, Data, Clouds, Boot), JPA (Hibernate, EclipseLink), Guice, GWT(SmartGWT, " +
+                "ExtGWT/GXT), Vaadin, Jasperreports, Apache Commons, Eclipse SWT, JUnit, Selenium (htmlelements).");
+        qualificationList.add("Python: Django");
+        qualificationList.add("JavaScript: jQuery, ExtJS, Bootstrap.js, underscore.js");
+        qualificationList.add("Scala: SBT, Play2, Specs2, Anorm, Spray, Akka");
+        qualificationList.add("Технологии: Servlet, JSP/JSTL, JAX-WS, REST, EJB, RMI, JMS, JavaMail, JAXB, " +
+                "StAX, SAX, DOM, XSLT, MDB, JMX, JDBC, JPA, JNDI, JAAS, SOAP, AJAX, Commet, HTML5, ESB, CMIS, " +
+                "BPMN2, LDAP, OAuth1, OAuth2, JWT.");
+        qualificationList.add("Инструменты: Maven + plugin development, Gradle, настройка Ngnix,");
+        qualificationList.add("администрирование Hudson/Jenkins, Ant + custom task, SoapUI, JPublisher, Flyway, " +
+                "Nagios, iReport, OpenCmis, Bonita, pgBouncer.");
+        qualificationList.add("Отличное знание и опыт применения концепций ООП, SOA, шаблонов проектрирования, " +
+                "архитектурных шаблонов, UML, функционального программирования");
+        qualificationList.add("Родной русский, английский \"upper intermediate\"");
+        testResume.addSection(SectionType.QUALIFICATION, new ListSection(qualificationList));
 //        List<Organization> experienceList = new ArrayList<>();
 //        experienceList.add(
 //                new Organization("Java Online Projects", "http://javaops.ru/",
@@ -165,17 +165,17 @@ public class ResumeTestData {
         testResume2.addContact(GITHUB, "https://github.com/2");
         testResume2.addContact(STACKOVERFLOW, "https://stackoverflow.com/users/2");
         testResume2.addContact(HOME_PAGE, "http://2.ru/");
-//        testResume2.addSection(SectionType.OBJECTIVE, new TextSection("Позиция - резюме 2"));
-//        testResume2.addSection(SectionType.PERSONAL, new TextSection("Личные качества - резюме 2"));
-//        List<String> achievementList = new ArrayList<>();
-//        achievementList.add("Достижения - резюме 2, пункт 1");
-//        achievementList.add("Достижения - резюме 2, пункт 2");
-//        testResume2.addSection(SectionType.ACHIEVEMENT, new ListSection(achievementList));
-//        List<String> qualificationList = new ArrayList<>();
-//        qualificationList.add("Квалификация - резюме 2, пункт 1");
-//        qualificationList.add("Квалификация - резюме 2, пункт 2");
-//        qualificationList.add("Квалификация - резюме 2, пункт 3");
-//        testResume2.addSection(SectionType.QUALIFICATION, new ListSection(qualificationList));
+        testResume2.addSection(SectionType.OBJECTIVE, new TextSection("Позиция - резюме 2"));
+        testResume2.addSection(SectionType.PERSONAL, new TextSection("Личные качества - резюме 2"));
+        List<String> achievementList = new ArrayList<>();
+        achievementList.add("Достижения - резюме 2, пункт 1");
+        achievementList.add("Достижения - резюме 2, пункт 2");
+        testResume2.addSection(SectionType.ACHIEVEMENT, new ListSection(achievementList));
+        List<String> qualificationList = new ArrayList<>();
+        qualificationList.add("Квалификация - резюме 2, пункт 1");
+        qualificationList.add("Квалификация - резюме 2, пункт 2");
+        qualificationList.add("Квалификация - резюме 2, пункт 3");
+        testResume2.addSection(SectionType.QUALIFICATION, new ListSection(qualificationList));
 //        List<Organization> experienceList = new ArrayList<>();
 //        experienceList.add(
 //                new Organization("Опыт работы - резюме 2, пункт 1", "http://javaops.ru/",
@@ -215,17 +215,17 @@ public class ResumeTestData {
         testResume3.addContact(GITHUB, "https://github.com/3");
         testResume3.addContact(STACKOVERFLOW, "https://stackoverflow.com/users/3");
         testResume3.addContact(HOME_PAGE, "http://3.ru/");
-//        testResume3.addSection(SectionType.OBJECTIVE, new TextSection("Позиция - резюме 3"));
-//        testResume3.addSection(SectionType.PERSONAL, new TextSection("Личные качества - резюме 3"));
-//        List<String> achievementList = new ArrayList<>();
-//        achievementList.add("Достижения - резюме 3, пункт 1");
-//        achievementList.add("Достижения - резюме 3, пункт 2");
-//        testResume3.addSection(SectionType.ACHIEVEMENT, new ListSection(achievementList));
-//        List<String> qualificationList = new ArrayList<>();
-//        qualificationList.add("Квалификация - резюме 3, пункт 1");
-//        qualificationList.add("Квалификация - резюме 3, пункт 2");
-//        qualificationList.add("Квалификация - резюме 3, пункт 3");
-//        testResume3.addSection(SectionType.QUALIFICATION, new ListSection(qualificationList));
+        testResume3.addSection(SectionType.OBJECTIVE, new TextSection("Позиция - резюме 3"));
+        testResume3.addSection(SectionType.PERSONAL, new TextSection("Личные качества - резюме 3"));
+        List<String> achievementList = new ArrayList<>();
+        achievementList.add("Достижения - резюме 3, пункт 1");
+        achievementList.add("Достижения - резюме 3, пункт 2");
+        testResume3.addSection(SectionType.ACHIEVEMENT, new ListSection(achievementList));
+        List<String> qualificationList = new ArrayList<>();
+        qualificationList.add("Квалификация - резюме 3, пункт 1");
+        qualificationList.add("Квалификация - резюме 3, пункт 2");
+        qualificationList.add("Квалификация - резюме 3, пункт 3");
+        testResume3.addSection(SectionType.QUALIFICATION, new ListSection(qualificationList));
 //        List<Organization> experienceList = new ArrayList<>();
 //        experienceList.add(
 //                new Organization("Опыт работы - резюме 3, пункт 1", "http://javaops.ru/",
@@ -265,17 +265,17 @@ public class ResumeTestData {
         testResume4.addContact(GITHUB, "https://github.com/4");
         testResume4.addContact(STACKOVERFLOW, "https://stackoverflow.com/users/4");
         testResume4.addContact(HOME_PAGE, "http://4.ru/");
-//        testResume4.addSection(SectionType.OBJECTIVE, new TextSection("Позиция - резюме 4"));
-//        testResume4.addSection(SectionType.PERSONAL, new TextSection("Личные качества - резюме 4"));
-//        List<String> achievementList = new ArrayList<>();
-//        achievementList.add("Достижения - резюме 4, пункт 1");
-//        achievementList.add("Достижения - резюме 4, пункт 2");
-//        testResume4.addSection(SectionType.ACHIEVEMENT, new ListSection(achievementList));
-//        List<String> qualificationList = new ArrayList<>();
-//        qualificationList.add("Квалификация - резюме 4, пункт 1");
-//        qualificationList.add("Квалификация - резюме 4, пункт 2");
-//        qualificationList.add("Квалификация - резюме 4, пункт 3");
-//        testResume4.addSection(SectionType.QUALIFICATION, new ListSection(qualificationList));
+        testResume4.addSection(SectionType.OBJECTIVE, new TextSection("Позиция - резюме 4"));
+        testResume4.addSection(SectionType.PERSONAL, new TextSection("Личные качества - резюме 4"));
+        List<String> achievementList = new ArrayList<>();
+        achievementList.add("Достижения - резюме 4, пункт 1");
+        achievementList.add("Достижения - резюме 4, пункт 2");
+        testResume4.addSection(SectionType.ACHIEVEMENT, new ListSection(achievementList));
+        List<String> qualificationList = new ArrayList<>();
+        qualificationList.add("Квалификация - резюме 4, пункт 1");
+        qualificationList.add("Квалификация - резюме 4, пункт 2");
+        qualificationList.add("Квалификация - резюме 4, пункт 3");
+        testResume4.addSection(SectionType.QUALIFICATION, new ListSection(qualificationList));
 //        List<Organization> experienceList = new ArrayList<>();
 //        experienceList.add(
 //                new Organization("Опыт работы - резюме 4, пункт 1", "http://javaops.ru/",
@@ -299,6 +299,56 @@ public class ResumeTestData {
 //                , LocalDate.of(2018, 5, 1)
 //                , "Заголовок", null)));
 //        educationList.add(new Organization("Образование - резюме 4, пункт 1", "http://www.luxoft.ru/"
+//                , new Organization.Position(LocalDate.of(2011, 3, 1)
+//                , LocalDate.of(2011, 4, 1)
+//                , "Заголовок", null)));
+//        testResume4.addSection(SectionType.EDUCATION, new OrganizationSection(educationList));
+        return testResume4;
+    }
+
+    public static Resume getTestResume5(String uuid) {
+        Resume testResume4 = new Resume(uuid,"name5");
+        testResume4.addContact(PHONE, "+7(921) 555");
+        testResume4.addContact(SKYPE, "skype5");
+        testResume4.addContact(MAIL, "mail45");
+        testResume4.addContact(LINKEDIN, "https://www.linkedin.com/in/5");
+        testResume4.addContact(GITHUB, "https://github.com/5");
+        testResume4.addContact(STACKOVERFLOW, "https://stackoverflow.com/users/5");
+        testResume4.addContact(HOME_PAGE, "http://4.ru/");
+        testResume4.addSection(SectionType.OBJECTIVE, new TextSection("Позиция - резюме 5"));
+        testResume4.addSection(SectionType.PERSONAL, new TextSection("Личные качества - резюме 5"));
+        List<String> achievementList = new ArrayList<>();
+        achievementList.add("Достижения - резюме 5, пункт 1");
+        achievementList.add("Достижения - резюме 5, пункт 2");
+        testResume4.addSection(SectionType.ACHIEVEMENT, new ListSection(achievementList));
+        List<String> qualificationList = new ArrayList<>();
+        qualificationList.add("Квалификация - резюме 5, пункт 1");
+        qualificationList.add("Квалификация - резюме 5, пункт 2");
+        qualificationList.add("Квалификация - резюме 5, пункт 3");
+        testResume4.addSection(SectionType.QUALIFICATION, new ListSection(qualificationList));
+//        List<Organization> experienceList = new ArrayList<>();
+//        experienceList.add(
+//                new Organization("Опыт работы - резюме 5, пункт 1", "http://javaops.ru/",
+//                        new Organization.Position(LocalDate.of(2019, 6, 1),
+//                                LocalDate.of(2020, 4
+//                                        , 1),
+//                                "Должность",
+//                                "Описание")));
+//        experienceList.add(new Organization("Опыт работы - резюме 5, пункт 2", "https://www.wrike" +
+//                ".com/"
+//                , new Organization.Position(LocalDate.of(2013, 10, 1)
+//                , LocalDate.of(2016, 1, 1)
+//                , "Должность"
+//                , "Описание")));
+//        testResume4.addSection(SectionType.EXPERIENCE, new OrganizationSection(experienceList));
+//        List<Organization> educationList = new ArrayList<>();
+//        educationList.add(new Organization("Образование - резюме 5, пункт 1", "https://www" +
+//                ".coursera" +
+//                ".org/course"
+//                , new Organization.Position(LocalDate.of(2016, 3, 1)
+//                , LocalDate.of(2018, 5, 1)
+//                , "Заголовок", null)));
+//        educationList.add(new Organization("Образование - резюме 5, пункт 1", "http://www.luxoft.ru/"
 //                , new Organization.Position(LocalDate.of(2011, 3, 1)
 //                , LocalDate.of(2011, 4, 1)
 //                , "Заголовок", null)));

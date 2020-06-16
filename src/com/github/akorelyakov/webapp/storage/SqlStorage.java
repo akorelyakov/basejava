@@ -183,9 +183,20 @@ public class SqlStorage implements Storage {
         try (PreparedStatement ps = conn.prepareStatement("INSERT INTO section (resume_uuid, type, value) VALUES (?," +
                 "?,?)")) {
             for (Map.Entry<SectionType, AbstractSection> e : resume.getSections().entrySet()) {
+                AbstractSection section = e.getValue();
                 ps.setString(1, resume.getUuid());
                 ps.setString(2, e.getKey().name());
-                ps.setString(3, e.getValue().toString());
+                switch (e.getKey()) {
+                    case OBJECTIVE:
+                    case PERSONAL:
+                        ps.setString(3, ((TextSection) section).getContent());
+                        break;
+                    case ACHIEVEMENT:
+                    case QUALIFICATION:
+                        List<String> list = ((ListSection) section).getItems();
+                        ps.setString(3, String.join("\n", list));
+                        break;
+                }
                 ps.addBatch();
             }
             ps.executeBatch();

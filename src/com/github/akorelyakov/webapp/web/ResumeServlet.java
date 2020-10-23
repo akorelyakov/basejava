@@ -29,6 +29,7 @@ public class ResumeServlet extends HttpServlet {
             case "delete":
                 storage.delete(uuid);
                 response.sendRedirect("resume");
+                return;
             case "view":
             case "edit":
                 resume = storage.get(uuid);
